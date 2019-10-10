@@ -9,7 +9,6 @@
 from __future__ import unicode_literals, absolute_import, print_function, division
 
 import functools
-import re
 
 __all__ = [
     # constants
@@ -559,12 +558,11 @@ def url(*url_rules):
 
     """
     def actual_decorator(function):
-        if not hasattr(function, 'url_regex'):
-            function.url_regex = []
+        if not hasattr(function, 'urls'):
+            function.urls = []
         for url_rule in url_rules:
-            url_regex = re.compile(url_rule)
-            if url_regex not in function.url_regex:
-                function.url_regex.append(url_regex)
+            if url_rule not in function.urls:
+                function.urls.append(url_rule)
         return function
     return actual_decorator
 

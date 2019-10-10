@@ -867,14 +867,14 @@ def track_topic(bot, trigger):
 def handle_url_callbacks(bot, trigger):
     """Dispatch callbacks on URLs
 
-    For each URL found in the trigger, trigger the URL callback registered by
-    the ``@url`` decorator.
+    For each URL found in the trigger, trigger matching URL callbacks. These
+    can be registered by either the :func:`@url <sopel.module.url>` decorator
+    or plugins calling :meth:`~sopel.bot.Sopel.register_url_callback` directly.
     """
     schemes = bot.config.core.auto_url_schemes
     # find URLs in the trigger
     for url in sopel.tools.web.search_urls(trigger, schemes=schemes):
-        # find callbacks for said URL
+        # find registered callbacks for said URL
         for function, match in bot.search_url_callbacks(url):
-            # trigger callback defined by the `@url` decorator
-            if hasattr(function, 'url_regex'):
-                function(bot, trigger, match=match)
+            # trigger matching callbacks
+            function(bot, trigger, match=match)

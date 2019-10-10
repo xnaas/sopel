@@ -125,6 +125,6 @@ def clean_module(module, config):
             elif hasattr(obj, 'interval'):
                 clean_callable(obj, config)
                 jobs.append(obj)
-            elif hasattr(obj, 'url_regex'):
+            elif hasattr(obj, 'urls'):
                 urls.append(obj)
     return callables, jobs, shutdowns, urls

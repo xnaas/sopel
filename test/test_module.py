@@ -116,9 +116,9 @@ def test_url():
     @module.url('pattern')
     def mock(bot, trigger, match):
         return True
-    patterns = [regex.pattern for regex in mock.url_regex]
-    assert len(patterns) == 1
-    assert 'pattern' in patterns
+
+    assert len(mock.urls) == 1
+    assert mock.urls == ['pattern']
 
 
 def test_url_args():
@@ -126,10 +126,8 @@ def test_url_args():
     def mock(bot, trigger, match):
         return True
 
-    patterns = [regex.pattern for regex in mock.url_regex]
-    assert len(patterns) == 2
-    assert 'first' in patterns
-    assert 'second' in patterns
+    assert len(mock.urls) == 2
+    assert mock.urls == ['first', 'second']
 
 
 def test_url_multiple():
@@ -139,11 +137,8 @@ def test_url_multiple():
     def mock(bot, trigger, match):
         return True
 
-    patterns = [regex.pattern for regex in mock.url_regex]
-    assert len(patterns) == 3
-    assert 'first' in patterns
-    assert 'second' in patterns
-    assert 'third' in patterns
+    assert len(mock.urls) == 3
+    assert mock.urls == ['third', 'second', 'first']
 
 
 def test_echo():

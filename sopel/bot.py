@@ -334,13 +334,12 @@ class Sopel(irc.Bot):
             self.unregister(func)
 
         # remove URL callback handlers
-        if "url_callbacks" in self.memory:
+        if 'url_callbacks' in self.memory:
             for func in urls:
-                regexes = func.url_regex
-                for regex in regexes:
-                    if func == self.memory['url_callbacks'].get(regex):
-                        self.unregister_url_callback(regex)
-                        LOGGER.debug('URL Callback unregistered: %r', regex)
+                for rule in func.urls:
+                    if func == self.memory['url_callbacks'].get(re.compile(rule)):
+                        self.unregister_url_callback(rule)
+                        LOGGER.debug('URL Callback unregistered: %s', rule)
 
         # remove plugin from registry
         del self._plugins[name]
@@ -473,13 +472,13 @@ class Sopel(irc.Bot):
                     interval)
 
         for func in urls:
-            for regex in func.url_regex:
-                self.register_url_callback(regex, func)
+            for url_rule in func.urls:
+                self.register_url_callback(url_rule, func)
                 callable_name = getattr(func, "__name__", 'UNKNOWN')
                 LOGGER.debug(
                     'URL Callback added "%s" for URL pattern "%s"',
                     callable_name,
-                    regex)
+                    url_rule)
 
     def part(self, channel, msg=None):
         """Leave a channel.
