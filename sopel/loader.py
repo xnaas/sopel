@@ -1,6 +1,7 @@
 # coding=utf-8
 from __future__ import unicode_literals, absolute_import, print_function, division
 
+import inspect
 import re
 import sys
 
@@ -44,7 +45,7 @@ def clean_callable(func, config):
     prefix = config.core.prefix
     help_prefix = config.core.help_prefix
     func._docs = {}
-    doc = trim_docstring(func.__doc__)
+    doc = trim_docstring(inspect.getdoc(func))
     examples = []
 
     func.thread = getattr(func, 'thread', True)
