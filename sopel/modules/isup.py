@@ -100,9 +100,30 @@ def isup_insecure(bot, trigger):
 
 
 @plugin.command('isup')
-@plugin.example('.isup google.com',
-                'http://google.com looks fine to me.',
-                online=True, vcr=True)
+@plugin.example(
+    '.isup https://expired.badssl.com/',
+    'https://expired.badssl.com/ looks down to me (SSL error). Try using `.isupinsecure`.',
+    online=True, vcr=True)
+@plugin.example(
+    '.isup https://httpstat.us/503',
+    'https://httpstat.us/503 looks down to me (HTTP 503 "Service Unavailable").',
+    online=True, vcr=True)
+@plugin.example(
+    '.isup http://10.0.0.0',
+    'http://10.0.0.0 looks down to me (timed out while connecting).',
+    online=True, vcr=True)
+@plugin.example(
+    '.isup https://httpbingo.org/delay/10',
+    'https://httpbingo.org/delay/10 looks down to me (timed out waiting for reply).',
+    online=True, vcr=True)
+@plugin.example(
+    '.isup http://127.0.0.1:1',
+    'http://127.0.0.1:1 looks down to me (connection error).',
+    online=True, vcr=True)
+@plugin.example(
+    '.isup google.com',
+    'http://google.com looks fine to me.',
+    online=True, vcr=True, user_help=True)
 @plugin.output_prefix(PLUGIN_OUTPUT_PREFIX)
 def isup(bot, trigger):
     """Check if a website is up or not."""

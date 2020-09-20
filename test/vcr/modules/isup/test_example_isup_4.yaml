@@ -1,0 +1,35 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.24.0]
+    method: HEAD
+    uri: https://httpstat.us/503
+  response:
+    body: {string: ''}
+    headers:
+      Access-Control-Allow-Headers: [Retry-After]
+      Access-Control-Allow-Origin: ['*']
+      Access-Control-Expose-Headers: [Request-Context]
+      CF-Cache-Status: [DYNAMIC]
+      CF-RAY: [5d5c2d59dae603ac-ORD]
+      Cache-Control: [private]
+      Connection: [keep-alive]
+      Content-Length: ['23']
+      Content-Type: [text/plain; charset=utf-8]
+      Date: ['Sun, 20 Sep 2020 14:18:45 GMT']
+      Expect-CT: ['max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"']
+      Request-Context: ['appId=cid-v1:7585021b-2db7-4da6-abff-2cf23005f0a9']
+      Server: [cloudflare]
+      Set-Cookie: ['__cfduid=dba83977151c46d3825e90161b80a93df1600611521; expires=Tue,
+          20-Oct-20 14:18:41 GMT; path=/; domain=.httpstat.us; HttpOnly; SameSite=Lax',
+        ARRAffinity=c529441eca9a1f7cff05208d4b61553ecda3678bc13876939acfd3b19b1183c2;Path=/;HttpOnly;Domain=httpstat.us]
+      X-AspNet-Version: [4.0.30319]
+      X-AspNetMvc-Version: ['5.1']
+      X-Powered-By: [ASP.NET]
+      cf-request-id: [054d7aac24000003ac5b880200000001]
+    status: {code: 503, message: Service Unavailable}
+version: 1
