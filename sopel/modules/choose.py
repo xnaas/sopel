@@ -22,10 +22,17 @@ def _format_safe(text):
 
     :param str text: text to clean of whitespace
     :rtype: str
+    :raises TypeError: if the passed ``text`` is not a string
 
     Our own take on ``str.strip()`` that skips stripping off IRC formatting
     and makes sure any formatting codes are closed if necessary.
     """
+    if not isinstance(text, str):
+        raise TypeError("A string is required.")
+    elif not text:
+        # unnecessary optimization
+        return ''
+
     start = end = 0
 
     # strip left
